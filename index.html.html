@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.5, maximum-scale=3.0">
+    <title>Myntra - Calculadora de Interés Compuesto | La Mejor Herramienta Financiera 2025</title>
+    <meta name="description" content="Calculadora de interés compuesto gratuita. Simula inversiones, ETFs y criptomonedas. Gráficos interactivos, múltiples monedas y proyecciones futuras. ¡Planifica tu libertad financiera!">
+    <meta name="keywords" content="calculadora interés compuesto, inversiones, ETFs, criptomonedas, finanzas personales, ahorro, rentabilidad">
+    <meta name="author" content="Myntra Financial Tools">
+    <meta property="og:title" content="Myntra - Calculadora de Interés Compuesto Avanzada">
+    <meta property="og:description" content="La herramienta definitiva para calcular el crecimiento de tus inversiones. Interfaz moderna, gráficos interactivos y soporte para múltiples activos financieros.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://myntra.app">
+    
+    <!-- MIT License Notice -->
+    <!-- 
+    MIT License
+    
+    Copyright (c) 2025 Myntra App
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+    -->
+    
+    <style>
+        /* CSS Variables for Theme Management */
+        :root {
+            --primary-color: #FF6B35;
+            --secondary-color: #F7931E;
+            --accent-color: #FFD23F;
+            --background-light: #FFF8E7;
+            --background-dark: #1A1A1A;
+            --surface-light: #FFFFFF;
+            --surface-dark: #2D2D2D;
+            --text-primary-light: #2C2C2C;
+            --text-primary-dark: #FFFFFF;
+            --text-secondary-light: #666666;
+            --text-secondary-dark: #CCCCCC;
+            --border-light: #E0E0E0;
+            --border-dark: #404040;
+            --success: #27AE60;
+            --warning: #F39C12;
+            --error: #E74C3C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            background-color: var(--background-light);
+            color: var(--text-primary-light);
+        }
+
+        body.dark {
+            background-color: var(--background-dark);
+            color: var(--text-primary-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 248, 231, 0.9);
+        }
+
+        body.dark .header {
+            border-bottom-color: var(--border-dark);
+            background-color: rgba(26, 26, 26, 0.9);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transform: rotate(-5deg);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: rotate(-5deg) translateY(0px); }
+            50% { transform: rotate(-5deg) translateY(-5px); }
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            background: var(--surface-light);
+            border: 1px solid var(--border-light);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-primary-light);
+            font-size: 14px;
+        }
+
+        body.dark .btn {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+            color: var(--text-primary-dark);
+        }
+
+        .btn:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .main {
+            padding: 2rem 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .calculator-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--surface-light);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        body.dark .card {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--surface-light);
+            color: var(--text-primary-light);
+        }
+
+        body.dark .input-group input, body.dark .input-group select {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+            color: var(--text-primary-dark);
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .currency-prefix {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .currency-prefix + input {
+            padding-left: 45px;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .result-card h3 {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-card .value {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            background: var(--surface-light);
+            border-radius: 15px;
+            border: 1px solid var(--border-light);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark .chart-container {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+
+        .help-content {
+            background: var(--surface-light);
+            border: 1px solid var(--border-light);
+            color: var(--text-primary-light);
+        }
+
+        body.dark .help-content {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+            color: var(--text-primary-dark);
+        }
+
+        body.dark #helpContent {
+            background: var(--surface-dark) !important;
+            border-color: var(--border-dark) !important;
+            color: var(--text-primary-dark) !important;
+        }
+
+        body.dark #helpContent h3 {
+            color: var(--primary-color) !important;
+        }
+
+        body.dark #helpContent ul li {
+            color: var(--text-primary-dark) !important;
+        }
+
+        body.dark #helpContent ul li strong {
+            color: var(--text-primary-dark) !important;
+        }
+
+        .chart-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-secondary-light);
+            font-size: 1.1rem;
+        }
+
+        body.dark .chart-placeholder {
+            color: var(--text-secondary-dark);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        body.dark .data-table th,
+        body.dark .data-table td {
+            border-bottom-color: var(--border-dark);
+        }
+
+        .data-table th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-light);
+            margin-top: 3rem;
+        }
+
+        body.dark .footer {
+            border-top-color: var(--border-dark);
+        }
+
+        @media (max-width: 768px) {
+            .calculator-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-controls {
+                gap: 10px;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .hero {
+                margin-bottom: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            #helpContent {
+                padding: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .result-card {
+                padding: 1rem;
+            }
+
+            .result-card .value {
+                font-size: 1.4rem;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+            .nav {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .card {
+                padding: 1rem;
+                border-radius: 15px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            .calculate-btn {
+                padding: 12px;
+                font-size: 1rem;
+            }
+
+            .input-group input, .input-group select {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+
+            .currency-prefix + input {
+                padding-left: 40px;
+            }
+
+            .results-grid {
+                gap: 0.8rem;
+            }
+
+            .result-card {
+                padding: 0.8rem;
+            }
+
+            .result-card .value {
+                font-size: 1.2rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 8px 6px;
+                font-size: 0.8rem;
+            }
+
+            #helpContent {
+                padding: 1rem;
+                font-size: 0.85rem;
+                line-height: 1.6;
+            }
+
+            #helpContent h3 {
+                font-size: 1rem;
+            }
+
+            #helpContent ul {
+                padding-left: 1.2rem;
+            }
+        }
+
+        /* Intentar ocultar el aviso de Claude */
+        [data-testid="artifact-footer"],
+        .artifact-footer,
+        .claude-artifact-footer,
+        .artifact-attribution,
+        footer[data-testid*="artifact"],
+        div[class*="artifact-footer"],
+        div[class*="attribution"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            overflow: hidden !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+
+        /* Ocultar cualquier elemento que contenga "Claude" en texto */
+        *:not(script):not(style) {
+            /* Esto no funcionará para texto, pero intentamos ocultar elementos comunes */
+        }
+
+        /* Estilos adicionales para ocultar elementos de footer externos */
+        body::after,
+        html::after,
+        #root::after,
+        .app::after {
+            display: none !important;
+        }
+
+        /* Forzar que nuestro footer sea el último elemento visible */
+        .footer {
+            position: relative;
+            z-index: 999;
+            margin-bottom: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <script type="application/ld+json">
+    {
+        " @context": "https://schema.org",
+        " @type": "WebApplication",
+        "name": "Myntra - Calculadora de Interés Compuesto",
+        "description": "Calculadora avanzada de interés compuesto para inversiones, ETFs y criptomonedas",
+        "url": "https://myntra.app",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            " @type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        }
+    }
+    </script>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span>Myntra</span>
+                </a>
+                <div class="nav-controls">
+                    <button class="btn" id="langBtn">
+                         ES
+                    </button>
+                    <button class="btn" id="themeBtn">
+                        🌙
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <h1 id="heroTitle">Calculadora de Interés Compuesto</h1>
+                <p id="heroSubtitle">La herramienta definitiva para planificar tu futuro financiero. Calcula el crecimiento de tus inversiones con precisión profesional.</p>
+                
+                <!-- Desplegable de ayuda -->
+                <div style="margin-top: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <button id="helpToggle" class="btn" style="margin: 0 auto; display: block; background: var(--primary-color); color: white; border: none; padding: 12px 24px;">
+                         <span id="helpButtonText">¿Cómo usar esta calculadora?</span>
+                    </button>
+                    <div id="helpContent" style="display: none; margin-top: 1rem; padding: 2rem; border-radius: 15px; text-align: left;" class="help-content">
+                        <div id="helpText">
+                            <h3 id="helpTitle" style="color: var(--primary-color); margin-bottom: 1rem;"> Cómo usar Myntra</h3>
+                            <ul style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                <li id="helpInitialCap"><strong>Capital Inicial:</strong> La cantidad de dinero que inviertes al principio</li>
+                                <li id="helpMonthlyCont"><strong>Aportación Mensual:</strong> Dinero que añades cada mes a tu inversión</li>
+                                <li id="helpInterestRate"><strong>Tasa de Interés:</strong> Rentabilidad anual esperada (ej: 7% para índices bursátiles)</li>
+                                <li id="helpPeriod"><strong>Período:</strong> Años que mantendrás la inversión</li>
+                            </ul>
+                            
+                            <h3 id="helpResultsTitle" style="color: var(--primary-color); margin-bottom: 1rem;"> Resultados que obtienes</h3>
+                            <ul style="margin-bottom: 1.5rem; line-height: 1.8;">
+                                <li id="helpFinalValue"><strong>Valor Final:</strong> Total de dinero que tendrás al final</li>
+                                <li id="helpInterestGained"><strong>Intereses Ganados:</strong> Dinero extra generado por el interés compuesto</li>
+                                <li id="helpTotalContributed"><strong>Total Aportado:</strong> Suma de tu capital inicial + todas las aportaciones</li>
+                                <li id="helpROI"><strong>ROI:</strong> Rentabilidad sobre la inversión en porcentaje</li>
+                                <li id="helpChart"><strong>Gráfico:</strong> Visualización del crecimiento año por año</li>
+                                <li id="helpTable"><strong>Tabla:</strong> Desglose detallado de cada año</li>
+                            </ul>
+                            
+                            <h3 id="helpExamplesTitle" style="color: var(--primary-color); margin-bottom: 1rem;"> Ejemplos prácticos</h3>
+                            <ul style="line-height: 1.8;">
+                                <li id="helpBonds"><strong>Bonos de Estado/Planes de pensiones:</strong> 2-6% anual (muy conservador)</li>
+                                <li id="helpETFs"><strong>ETFs/Índices:</strong> 6-8% anual (conservador)</li>
+                                <li id="helpStocks"><strong>Acciones diversificadas:</strong> 8-10% anual (moderado)</li>
+                                <li id="helpCrypto"><strong>Criptomonedas:</strong> 15-25% anual (alto riesgo)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="calculator-section">
+                <div class="card">
+                    <h2 id="formTitle">Parámetros de Inversión</h2>
+                    <form id="calculatorForm">
+                        <div class="form-group">
+                            <label for="principal" id="principalLabel">Capital Inicial</label>
+                            <div class="input-group">
+                                <span class="currency-prefix" id="currencySymbol1">€</span>
+                                <input type="number" id="principal" value="10000" min="0" step="100">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="monthlyContribution" id="monthlyLabel">Aportación Mensual</label>
+                            <div class="input-group">
+                                <span class="currency-prefix" id="currencySymbol2">€</span>
+                                <input type="number" id="monthlyContribution" value="500" min="0" step="50">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interestRate" id="rateLabel">Tasa de Interés Anual (%)</label>
+                            <div class="input-group">
+                                <input type="number" id="interestRate" value="7" min="0" max="50" step="0.1">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="years" id="yearsLabel">Período (años)</label>
+                            <div class="input-group">
+                                <input type="number" id="years" value="20" min="1" max="50" step="1">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currency" id="currencyLabel">Moneda</label>
+                            <div class="input-group">
+                                <select id="currency">
+                                    <option value="EUR">Euro (€)</option>
+                                    <option value="USD">Dólar ($)</option>
+                                    <option value="GBP">Libra (£)</option>
+                                    <option value="JPY">Yen (¥)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="button" class="calculate-btn" id="calculateBtn">
+                            <span id="btnText">Calcular Interés Compuesto</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h2 id="resultsTitle">Resultados de la Simulación</h2>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <h3 id="finalAmountLabel">Valor Final</h3>
+                            <div class="value" id="finalAmount">€0</div>
+                        </div>
+                        <div class="result-card">
+                            <h3 id="totalInterestLabel">Intereses Ganados</h3>
+                            <div class="value" id="totalInterest">€0</div>
+                        </div>
+                        <div class="result-card">
+                            <h3 id="totalContributionsLabel">Total Aportado</h3>
+                            <div class="value" id="totalContributions">€0</div>
+                        </div>
+                        <div class="result-card">
+                            <h3 id="roiLabel">ROI (%)</h3>
+                            <div class="value" id="roi">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container" id="chartContainer">
+                        <div class="chart-placeholder">
+                             Gráfico de crecimiento se mostrará aquí
+                        </div>
+                    </div>
+
+                    <div id="tableContainer"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p id="footerText">© 2025 Myntra - Calculadora de Interés Compuesto. Licencia MIT. Código libre y gratuito.</p>
+            <div id="technicalInfo" style="margin-top: 1rem;">
+                <button id="techInfoToggle" class="btn" style="font-size: 12px; padding: 5px 10px;">Información técnica</button>
+                <div id="techInfoContent" style="display: none; margin-top: 1rem; font-size: 12px; opacity: 0.7;">
+                    <p>Esta aplicación fue creada con la ayuda de Claude, un asistente de IA de Anthropic. El código fuente está disponible bajo la Licencia MIT.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Estado global de la aplicación
+        let currentLang = 'es';
+        let isDarkMode = false;
+        
+        // Configuración de monedas
+        const currencies = {
+            EUR: { symbol: '€', name: 'Euro' },
+            USD: { symbol: '$', name: 'Dólar' },
+            GBP: { symbol: '£', name: 'Libra' },
+            JPY: { symbol: '¥', name: 'Yen' }
+        };
+
+        // Traducciones
+        const translations = {
+            es: {
+                heroTitle: 'Calculadora de Interés Compuesto',
+                heroSubtitle: 'La herramienta definitiva para planificar tu futuro financiero. Calcula el crecimiento de tus inversiones con precisión profesional.',
+                formTitle: 'Parámetros de Inversión',
+                principalLabel: 'Capital Inicial',
+                monthlyLabel: 'Aportación Mensual',
+                rateLabel: 'Tasa de Interés Anual (%)',
+                yearsLabel: 'Período (años)',
+                currencyLabel: 'Moneda',
+                btnText: 'Calcular Interés Compuesto',
+                resultsTitle: 'Resultados de la Simulación',
+                finalAmountLabel: 'Valor Final',
+                totalInterestLabel: 'Intereses Ganados',
+                totalContributionsLabel: 'Total Aportado',
+                roiLabel: 'ROI (%)',
+                footerText: '© 2025 Myntra - Calculadora de Interés Compuesto. Licencia MIT. Código libre y gratuito.',
+                yearLabel: 'Año',
+                contributionLabel: 'Aportación',
+                interestLabel: 'Intereses',
+                balanceLabel: 'Balance',
+                helpButtonText: '¿Cómo usar esta calculadora?',
+                helpTitle: 'Cómo usar Myntra',
+                helpInitialCap: '<strong>Capital Inicial:</strong> La cantidad de dinero que inviertes al principio',
+                helpMonthlyCont: '<strong>Aportación Mensual:</strong> Dinero que añades cada mes a tu inversión',
+                helpInterestRate: '<strong>Tasa de Interés:</strong> Rentabilidad anual esperada (ej: 7% para índices bursátiles)',
+                helpPeriod: '<strong>Período:</strong> Años que mantendrás la inversión',
+                helpResultsTitle: 'Resultados que obtienes',
+                helpFinalValue: '<strong>Valor Final:</strong> Total de dinero que tendrás al final',
+                helpInterestGained: '<strong>Intereses Ganados:</strong> Dinero extra generado por el interés compuesto',
+                helpTotalContributed: '<strong>Total Aportado:</strong> Suma de tu capital inicial + todas las aportaciones',
+                helpROI: '<strong>ROI:</strong> Rentabilidad sobre la inversión en porcentaje',
+                helpChart: '<strong>Gráfico:</strong> Visualización del crecimiento año por año',
+                helpTable: '<strong>Tabla:</strong> Desglose detallado de cada año',
+                helpExamplesTitle: 'Ejemplos prácticos',
+                helpBonds: '<strong>Bonos de Estado/Planes de pensiones:</strong> 2-6% anual (muy conservador)',
+                helpETFs: '<strong>ETFs/Índices:</strong> 6-8% anual (conservador)',
+                helpStocks: '<strong>Acciones diversificadas:</strong> 8-10% anual (moderado)',
+                helpCrypto: '<strong>Criptomonedas:</strong> 15-25% anual (alto riesgo)'
+            },
+            en: {
+                heroTitle: 'Compound Interest Calculator',
+                heroSubtitle: 'The ultimate tool to plan your financial future. Calculate your investment growth with professional precision.',
+                formTitle: 'Investment Parameters',
+                principalLabel: 'Initial Capital',
+                monthlyLabel: 'Monthly Contribution',
+                rateLabel: 'Annual Interest Rate (%)',
+                yearsLabel: 'Period (years)',
+                currencyLabel: 'Currency',
+                btnText: 'Calculate Compound Interest',
+                resultsTitle: 'Simulation Results',
+                finalAmountLabel: 'Final Value',
+                totalInterestLabel: 'Interest Earned',
+                totalContributionsLabel: 'Total Contributed',
+                roiLabel: 'ROI (%)',
+                footerText: '© 2025 Myntra - Compound Interest Calculator. MIT License. Free and open source code.',
+                yearLabel: 'Year',
+                contributionLabel: 'Contribution',
+                interestLabel: 'Interest',
+                balanceLabel: 'Balance',
+                helpButtonText: 'How to use this calculator?',
+                helpTitle: 'How to use Myntra',
+                helpInitialCap: '<strong>Initial Capital:</strong> The amount of money you invest at the beginning',
+                helpMonthlyCont: '<strong>Monthly Contribution:</strong> Money you add to your investment each month',
+                helpInterestRate: '<strong>Interest Rate:</strong> Expected annual return (e.g., 7% for stock market indexes)',
+                helpPeriod: '<strong>Period:</strong> Years you will keep the investment',
+                helpResultsTitle: 'Results you get',
+                helpFinalValue: '<strong>Final Value:</strong> Total money you will have at the end',
+                helpInterestGained: '<strong>Interest Earned:</strong> Extra money generated by compound interest',
+                helpTotalContributed: '<strong>Total Contributed:</strong> Sum of your initial capital + all contributions',
+                helpROI: '<strong>ROI:</strong> Return on investment in percentage',
+                helpChart: '<strong>Chart:</strong> Visualization of year-by-year growth',
+                helpTable: '<strong>Table:</strong> Detailed breakdown of each year',
+                helpExamplesTitle: 'Practical examples',
+                helpBonds: '<strong>Government Bonds/Pension Plans:</strong> 2-6% per year (very conservative)',
+                helpETFs: '<strong>ETFs/Index Funds:</strong> 6-8% per year (conservative)',
+                helpStocks: '<strong>Diversified Stocks:</strong> 8-10% per year (moderate)',
+                helpCrypto: '<strong>Cryptocurrencies:</strong> 15-25% per year (high risk)'
+            }
+        };
+
+        // Función para cambiar idioma
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('langBtn').innerHTML = currentLang === 'es' ? ' ES' : ' EN';
+            updateLanguage();
+        }
+
+        // Función para cambiar tema
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark', isDarkMode);
+            document.getElementById('themeBtn').innerHTML = isDarkMode ? '☀️' : '🌙';
+        }
+
+        // Actualizar textos del idioma
+        function updateLanguage() {
+            const texts = translations[currentLang];
+            Object.keys(texts).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.innerHTML = texts[key];
+                }
+            });
+        }
+
+        // Actualizar símbolos de moneda
+        function updateCurrencySymbols() {
+            const selectedCurrency = document.getElementById('currency').value;
+            const symbol = currencies[selectedCurrency].symbol;
+            document.getElementById('currencySymbol1').textContent = symbol;
+            document.getElementById('currencySymbol2').textContent = symbol;
+        }
+
+        // Función de cálculo principal CORREGIDA
+        function calculate() {
+            const principal = parseFloat(document.getElementById('principal').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const years = parseInt(document.getElementById('years').value) || 0;
+            const currency = document.getElementById('currency').value;
+
+            if (principal <= 0 && monthlyContribution <= 0) return;
+
+            const monthlyRate = annualRate / 100 / 12;
+            const totalMonths = years * 12;
+            
+            let balance = principal;
+            let totalContributions = principal; // Empezamos con el capital inicial
+            let yearlyData = [];
+
+            for (let month = 1; month <= totalMonths; month++) {
+                // Aplicar interés mensual al balance actual
+                balance = balance * (1 + monthlyRate);
+                
+                // Añadir aportación mensual
+                balance += monthlyContribution;
+                if (month <= totalMonths) { // Correction: only add contribution for the duration of the investment
+                    totalContributions += monthlyContribution;
+                }
+
+                // Guardar datos anuales
+                if (month % 12 === 0) {
+                    const year = month / 12;
+                    const yearlyInterest = balance - totalContributions;
+                    yearlyData.push({
+                        year: year,
+                        contribution: totalContributions,
+                        interest: yearlyInterest,
+                        balance: balance
+                    });
+                }
+            }
+
+            const finalAmount = balance;
+            const totalInterest = finalAmount - totalContributions;
+            const roi = totalContributions > 0 ? (totalInterest / totalContributions) * 100 : 0;
+
+            displayResults(finalAmount, totalInterest, totalContributions, roi, currency);
+            generateChart(yearlyData, currency);
+            generateTable(yearlyData, currency);
+        }
+
+        // Mostrar resultados
+        function displayResults(finalAmount, totalInterest, totalContributions, roi, currency) {
+            document.getElementById('finalAmount').textContent = formatCurrency(finalAmount, currency);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest, currency);
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions, currency);
+            document.getElementById('roi').textContent = formatNumber(roi) + '%';
+        }
+
+        // Generar gráfico
+        function generateChart(data, currency) {
+            const container = document.getElementById('chartContainer');
+            
+            if (!data || data.length === 0) {
+                container.innerHTML = '<div class="chart-placeholder"> Gráfico se generará tras el cálculo</div>';
+                return;
+            }
+            
+            const maxValue = Math.max(...data.map(d => d.balance));
+            
+            container.innerHTML = `
+                <div style="padding: 20px; height: 100%; display: flex; flex-direction: column;">
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-color);"> Crecimiento de la Inversión</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: end; height: 250px; border-bottom: 2px solid var(--primary-color); position: relative; background: linear-gradient(to top, rgba(255, 107, 53, 0.1), transparent);">
+                        ${data.map((item, index) => {
+                            const height = (item.balance / maxValue) * 200;
+                            return `
+                                <div style="
+                                    width: ${80 / data.length}%;
+                                    height: ${height}px;
+                                    background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+                                    border-radius: 4px 4px 0 0;
+                                    position: relative;
+                                    margin: 0 1px;
+                                    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+                                    cursor: pointer;
+                                " title="Año ${item.year}: ${formatCurrency(item.balance, currency)}">
+                                    <span style="
+                                        position: absolute;
+                                        bottom: -25px;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        font-size: 11px;
+                                        opacity: 0.8;
+                                        font-weight: 600;
+                                    ">${item.year}</span>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div style="text-align: center; margin-top: 30px; padding: 15px; background: rgba(255, 107, 53, 0.1); border-radius: 10px;">
+                        <p style="opacity: 0.9; margin-bottom: 5px;">Valor final después de ${data.length} años:</p>
+                        <p style="font-size: 1.5rem; font-weight: 800; color: var(--primary-color);">
+                            ${formatCurrency(data[data.length - 1]?.balance || 0, currency)}
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Generar tabla
+        function generateTable(data, currency) {
+            const texts = translations[currentLang];
+            
+            const tableHTML = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>${texts.yearLabel}</th>
+                            <th>${texts.contributionLabel}</th>
+                            <th>${texts.interestLabel}</th>
+                            <th>${texts.balanceLabel}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.map(item => `
+                            <tr>
+                                <td>${item.year}</td>
+                                <td>${formatCurrency(item.contribution, currency)}</td>
+                                <td>${formatCurrency(item.interest, currency)}</td>
+                                <td><strong>${formatCurrency(item.balance, currency)}</strong></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            document.getElementById('tableContainer').innerHTML = tableHTML;
+        }
+
+        // Formatear números
+        function formatNumber(num) {
+            return new Intl.NumberFormat('es-ES', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(Math.round(num));
+        }
+
+        function formatCurrency(num, currency) {
+            const symbol = currencies[currency].symbol;
+            const formattedNum = formatNumber(num);
+            if (currency === 'EUR') {
+                return formattedNum + ' ' + symbol;
+            } else {
+                return symbol + formattedNum;
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Botón de idioma
+            document.getElementById('langBtn').addEventListener('click', toggleLanguage);
+            
+            // Botón de tema
+            document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+            
+            // Botón de calcular
+            document.getElementById('calculateBtn').addEventListener('click', calculate);
+            
+            // Botón de ayuda
+            document.getElementById('helpToggle').addEventListener('click', function() {
+                const helpContent = document.getElementById('helpContent');
+                const isVisible = helpContent.style.display !== 'none';
+                helpContent.style.display = isVisible ? 'none' : 'block';
+                this.style.background = isVisible ? 'var(--primary-color)' : 'var(--secondary-color)';
+            });
+            
+            // Cambio de moneda
+            document.getElementById('currency').addEventListener('change', function() {
+                updateCurrencySymbols();
+                calculate();
+            });
+            
+            // Cálculo automático en cambio de inputs
+            ['principal', 'monthlyContribution', 'interestRate', 'years'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculate);
+            });
+            
+            // Inicializar
+            updateCurrencySymbols();
+            calculate();
+
+            document.getElementById('techInfoToggle').addEventListener('click', function() {
+                const techInfoContent = document.getElementById('techInfoContent');
+                const isVisible = techInfoContent.style.display !== 'none';
+                techInfoContent.style.display = isVisible ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>
